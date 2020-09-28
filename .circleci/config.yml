@@ -1,17 +1,17 @@
 version: 2
 jobs:
     build:
-        working_directory: ~/app
+        working_directory: ~/myapp/angular-whishlist
         docker:
-            image: circeci/node:8-browsers
+           - image: circeci/node:8-browsers
         steps:
-            checkout:
-                path: ~/app
-            restore_cache:
+           - checkout:
+                path: ~/myapp
+           - restore_cache:
                 key: angular-whishlist-{{ .Branch }}-{{ checksum "package-lock.json"}}
-            run: npm install
-            save_cache:
+           - run: npm install
+           - save_cache:
                 key: angular-whishlist-{{ .Branch }}-{{ checksum "package-lock.json"}}
                 paths:
                     "node_modules"
-            run: npm run test -- --progress=false --watch=false --browsers=ChromeHeadlessCI
+           - run: npm run test -- --progress=false --watch=false --browsers=ChromeHeadlessCI
