@@ -1,12 +1,12 @@
 version: 2
 jobs:
     build:
-        working_directory: ~/serve
+        working_directory: ~/app
         docker:
             image: circeci/node:8-browsers
         steps:
             checkout:
-                path: ~/serve
+                path: ~/app
             restore_cache:
                 key: angular-whishlist-{{ .Branch }}-{{ checksum "package-lock.json"}}
             run: npm install
