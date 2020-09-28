@@ -1,0 +1,52 @@
+<div>
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="/" >
+            Articles simple CRUD
+        </a>
+    </nav>
+
+    <div class='container'>
+        <div class="row">
+            <div class="col-md-8 mt-4">
+                <ul class="list-group">
+                    {{listaNull}}
+                    <li *ngFor="let article of articleArray" 
+                    class="list-group-item list-group-item-action"
+                    (click)="openForEdit(article)"
+                    [class.active]="article === selectArticle">
+                    <span class="badge badge-primary">{{article._id}}</span>
+                        {{ article.user}} - {{article.nameArticle}} - {{article.date}}
+                    </li>
+                </ul>
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <div class="card-title">
+                            Inserta un Nuevo articulo
+                            <div class="form-group">
+                                <input type="text" [(ngModel)]="selectArticle.user" placeholder="insert a user" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" [(ngModel)]="selectArticle.nameArticle" placeholder="insert to article" class="form-control"/>
+                            </div>
+                            <div>
+                                <button (click)="addOrEdit()" class="btn btn-primary">
+                                    Submit
+                                </button>
+                                <button 
+                                    *ngIf="selectArticle._id !== 0"
+                                    class="btn btn-danger ml-5"
+                                    (click)='deleteArticle()'>
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
+    </div>
+</div>
+
